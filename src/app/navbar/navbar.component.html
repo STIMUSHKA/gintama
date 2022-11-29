@@ -1,11 +1,6 @@
 <div class="navbar-wrap">
     <mat-tab-group class="navbar">
-        <mat-tab label="Season 1"> <app-season></app-season> </mat-tab>
-        <mat-tab label="Season 2"> <app-season></app-season> </mat-tab>
-        <mat-tab label="Season 3"> <app-season></app-season> </mat-tab>
-        <mat-tab label="Season 4"> <app-season></app-season> </mat-tab>
-        <mat-tab label="Season 5"> <app-season></app-season> </mat-tab>
-        <mat-tab label="Season 6"> <app-season></app-season> </mat-tab>
+        <mat-tab *ngFor="let season of seasonsData.seasons" label="Season 1"> <app-season [season]="season"></app-season> </mat-tab>
     </mat-tab-group>
     <br>
     <br>
