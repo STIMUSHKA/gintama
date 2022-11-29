@@ -10,12 +10,16 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTab } from '@angular/material/tabs';
 import { MatTabGroup } from '@angular/material/tabs';
 import { VjsPlayer } from './vjs-player/vjs-player.component';
+import { SeasonComponent } from './season/season.component';
+import { SeriesCellComponent } from './series-cell/series-cell.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     VjsPlayer,
+    SeasonComponent,
+    SeriesCellComponent,
   ],
   imports: [
     BrowserModule,

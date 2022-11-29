@@ -1,26 +1,13 @@
 <div class="navbar-wrap">
     <mat-tab-group class="navbar">
-        <mat-tab label="Season 1"> Season 1 </mat-tab>
-        <mat-tab label="Season 2"> Season 2 </mat-tab>
-        <mat-tab label="Season 3"> Season 3 </mat-tab>
-        <mat-tab label="Season 4"> Season 4 </mat-tab>
-        <mat-tab label="Season 5"> Season 5 </mat-tab>
-        <mat-tab label="Season 6"> Season 6 </mat-tab>
+        <mat-tab label="Season 1"> <app-season></app-season> </mat-tab>
+        <mat-tab label="Season 2"> <app-season></app-season> </mat-tab>
+        <mat-tab label="Season 3"> <app-season></app-season> </mat-tab>
+        <mat-tab label="Season 4"> <app-season></app-season> </mat-tab>
+        <mat-tab label="Season 5"> <app-season></app-season> </mat-tab>
+        <mat-tab label="Season 6"> <app-season></app-season> </mat-tab>
     </mat-tab-group>
     <br>
     <br>
-    <app-vjs-player 
-        [options]="{
-            fluid: false,
-            aspectRatio: '16:9', 
-            readyState: 4,
-            poster: 'https://images7.alphacoders.com/349/thumb-1920-349986.jpg',
-            volume: '1', 
-            width: 900, 
-            muted: false, 
-            controls: true, 
-            autoplay: false,
-            sources: [{ src: 'https://r220107.kujo-jotaro.com/boku-dake/1.1080.d98356b67bf5a2f8.mp4?hash1=60cbefc691d413715b37e75e706b4c5f&hash2=264f51c1164a22e783ab609835ce518e', type: 'video/mp4' }]
-        }"
-    ></app-vjs-player>
+    
 </div>
