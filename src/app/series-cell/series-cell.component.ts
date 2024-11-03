@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Season } from '../interfaces'
 
 @Component({
@@ -7,8 +7,12 @@ import { Season } from '../interfaces'
   styleUrls: ['./series-cell.component.scss']
 })
 
-export class SeriesCellComponent {
+export class SeriesCellComponent implements OnInit {
 
-@Input() options: Season
+@Input() episodes: any
 
+
+ngOnInit(): void {
+  console.log('episodes', this.episodes)
+}
 }

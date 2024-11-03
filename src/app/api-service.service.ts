@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AllAnime, Season, SubSeason } from './interfaces';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
-  constructor() { }
+  private apiUrl = 'http://localhost:1337/api/'; // Замените на ваш URL Strapi
+  private populateAll = '?populate=*'
+  constructor(private http: HttpClient) { }
 
   public getSeasonsInfo() {
     return {
@@ -86,6 +89,15 @@ export class ApiService {
           },
         ]
       }
+    }
+
+
+    public getAllAnime(): Observable<AllAnime> {
+      return this.http.get<any>(this.apiUrl + 'animes'+ this.populateAll);
+    }
+
+    public getSeasonSeries(id: string): Observable<Season> {
+      return this.http.get<any>(this.apiUrl + 'seasons/' + id + this.populateAll);
     }
 
 }
