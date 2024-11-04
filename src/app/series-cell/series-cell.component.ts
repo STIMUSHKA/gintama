@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Season } from '../interfaces'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SubEpisode } from '../interfaces'
 
 @Component({
   selector: 'app-series-cell',
@@ -9,10 +9,14 @@ import { Season } from '../interfaces'
 
 export class SeriesCellComponent implements OnInit {
 
-@Input() episodes: any
+  @Input() episodes: any
+  @Output() episodeSelectedId = new EventEmitter<string>();
 
+  ngOnInit(): void {
+  }
 
-ngOnInit(): void {
-  console.log('episodes', this.episodes)
-}
+  public episodeClick(episode: SubEpisode) {
+    this.episodeSelectedId.emit(episode.documentId);
+    console.log(episode)
+  }
 }

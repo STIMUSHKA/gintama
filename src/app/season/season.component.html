@@ -1,15 +1,16 @@
 <app-vjs-player 
+*ngIf="getVideoUrl()"
         [options]="{
             fluid: false,
             aspectRatio: '16:9', 
             readyState: 4,
-            poster: 'https://images7.alphacoders.com/349/thumb-1920-349986.jpg',
+            poster: './i',
             volume: '1', 
             width: 900, 
             muted: false, 
             controls: true, 
             autoplay: false,
-            sources: [{ src: 'http://localhost:1337/uploads/One_Piece_001_Ru_Jp_Animedia_Tv_d2f44fddc4.mp4', type: 'video/mp4' }]
+            sources: [{ src: getVideoUrl(), type: 'video/mp4' }]
         }"
 ></app-vjs-player>
 <br><br>
@@ -18,5 +19,7 @@
     <button>next</button>
 </div>
 <br><br>
-<app-series-cell [episodes]="episodes"
+<app-series-cell 
+[episodes]="episodes"
+(episodeSelectedId)="onEpisodeSelected($event)"
 ></app-series-cell>

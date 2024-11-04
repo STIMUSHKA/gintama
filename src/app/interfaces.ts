@@ -46,14 +46,15 @@ export interface AllAnime {
 export interface SubEpisode {
     id: number,
     documentId: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
+    publishedAt?: string;
+    content: any;
     title: string;
     order: number | null;
 }
 
 export interface Episode {
-    data: SubEpisode[];
+    data: SubEpisode;
     meta: Meta;
 }

@@ -22,10 +22,6 @@ export class AnimeComponent implements OnInit {
 
 
     this._apiService.getAllAnime().subscribe( (animes: AllAnime) => {
-
-      console.log('12313123', animes)
-
-
       this.title = animes.data[0].title
       this.seasons = animes.data[0].seasons
     })
