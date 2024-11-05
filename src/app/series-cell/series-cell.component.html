@@ -1,3 +1,7 @@
 <div class="episode-background">
-    <span *ngFor="let episode of episodes" class="episode" (click)="episodeClick(episode)">Серия {{ episode.order }} </span>
+    <span *ngFor="let episode of episodes" class="aero" 
+          (click)="episodeClick(episode)" 
+          [ngClass]="{'active': episode.documentId == selectedEpisodeId}">
+        Серия {{ episode.order }} 
+    </span>
 </div>

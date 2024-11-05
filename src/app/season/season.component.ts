@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Episode, Season, SubEpisode } from '../interfaces';
 import { ApiService } from '../api-service.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-season',
@@ -10,6 +11,7 @@ import { ApiService } from '../api-service.service';
 export class SeasonComponent implements OnInit {
   public episodes: SubEpisode[]
   public selectedEpisodeId: string = ''
+  public isEpisodeLoaded: boolean = false;
   public selectedEpisode: SubEpisode = {
     id: 1,
     documentId: '',
@@ -24,7 +26,8 @@ export class SeasonComponent implements OnInit {
   @Input() documentId: string;
 
   constructor(
-    private _apiService: ApiService
+    private _apiService: ApiService,
+    private cdr: ChangeDetectorRef
   ) {}
 
 
@@ -42,19 +45,19 @@ export class SeasonComponent implements OnInit {
   }
   
   private loadEpisode(id: string) {
+    this.isEpisodeLoaded = false;
+    this.cdr.detectChanges();
     this.selectedEpisodeId = id
     this._apiService.getEpisode(id).subscribe( (episode: Episode) => {
       this.selectedEpisode = episode.data
       console.log('this.episode', episode)
-
+      this.isEpisodeLoaded = true;
+      this.cdr.detectChanges();
     })
   }
 
   public getVideoUrl(): string | any {
     if (this.selectedEpisode.content.url.length != 0) {
-       console.log()
-      console.log(11111111,this.selectedEpisode ? `${this.baseUrl}${this.selectedEpisode.content.url}` : '')
-
       return `${this.baseUrl}${this.selectedEpisode.content.url}`
     }
   }

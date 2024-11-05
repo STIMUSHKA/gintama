@@ -3,7 +3,32 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #609fac;
+    height: 100vh;
+
+    h2 {
+        color: #181818;
+        font-weight: 500;
+    }
     .anime {
         width: 900px;
+        background-image: url('../../assets/bc.jpg');
+        border-radius: 15px; /* Закругленные углы */
+
+        mat-tab {
+            color: #fff;
+        }
+
+        ::ng-deep {
+           .mat-mdc-tab-labels {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+            backdrop-filter: blur(10px); /* Эффект размытия фона */
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            background-color: #ffffffbd;
+           }
+        }
+
+
     }
-}
+}        
