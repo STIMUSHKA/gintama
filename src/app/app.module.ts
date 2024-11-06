@@ -9,18 +9,20 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTab } from '@angular/material/tabs';
 import { MatTabGroup } from '@angular/material/tabs';
 import { VjsPlayer } from './vjs-player/vjs-player.component';
-import { SeasonComponent } from './season/season.component';
+import { EpisodeComponent } from './episode/episode.component';
 import { SeriesCellComponent } from './series-cell/series-cell.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AnimeComponent } from './anime/anime.component';
+import { SeasonComponent } from './season/season.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VjsPlayer,
-    SeasonComponent,
+    EpisodeComponent,
     SeriesCellComponent,
     AnimeComponent,
+    SeasonComponent,
   ],
   imports: [
     BrowserModule,

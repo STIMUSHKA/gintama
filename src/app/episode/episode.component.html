@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="content">
+        <div class="title">
+            <h2>{{selectedEpisode.title}}</h2>
+        </div>
+        <app-vjs-player 
+        class="player"
+        *ngIf="isEpisodeLoaded"
+                [options]="{
+                    fluid: false,
+                    aspectRatio: '16:9', 
+                    readyState: 4,
+                    poster: 'https://m.media-amazon.com/images/M/MV5BNWJjZjhmNjgtMTk1Ny00NTM0LWI4ZTEtMjM1Yjk1OTVmMjZkXkEyXkFqcGdeQXVyNjA3Nzc4OTA@._V1_.jpg',
+                    volume: '1', 
+                    width: 900, 
+                    muted: false, 
+                    controls: true, 
+                    autoplay: false,
+                    sources: [{ src: getVideoUrl(), type: 'video/mp4' }]
+                }"
+        ></app-vjs-player>
+        <div *ngIf="!isEpisodeLoaded" class="loading"></div>
+        <br><br>
+    
+        <div class="control-container">
+            <div class="buttons">
+                <button class="aero">previous</button>
+                <button class="aero">next</button>
+            </div>
+            <br><br>
+            <app-series-cell 
+            *ngIf="selectedEpisodeId"
+            [episodeId]="selectedEpisodeId"
+            [episodes]="episodes"
+            (episodeSelectedId)="onEpisodeSelected($event)"
+            ></app-series-cell>
+        </div>    
+    </div>
+</div>

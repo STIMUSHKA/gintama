@@ -10,19 +10,19 @@ import { SubEpisode } from '../interfaces'
 export class SeriesCellComponent implements OnInit {
   public selectedEpisodeId: string = ''
   @Input() episodes: any = []
-  @Output() episodeSelectedId = new EventEmitter<string>();
+  @Input() episodeId: string = ''
+  @Output() emitEpisodeSelectedId = new EventEmitter<string>();
 
   ngOnInit(): void {
-    console.log('2323', this.episodes)
-    this.selectedEpisodeId = this.episodes[0].documentId
+    console.log('2323', this.episodes, this.episodeId)
+    this.selectedEpisodeId = this.episodeId
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['episodes'] && changes['episodes'].currentValue) {
-      console.log('Updated episodes:', changes['episodes'].currentValue);
-      // Если episodes изменились, можно обновить selectedEpisodeId
       if (changes['episodes'].currentValue.length > 0) {
-        this.selectedEpisodeId = changes['episodes'].currentValue[0].documentId; // Установите новый выбранный эпизод
+          this.selectedEpisodeId = this.episodeId
       }
     }
   }
@@ -30,7 +30,7 @@ export class SeriesCellComponent implements OnInit {
   public episodeClick(episode: SubEpisode) {
     console.log(episode)
     this.selectedEpisodeId = episode.documentId
-    this.episodeSelectedId.emit(episode.documentId);
+    this.emitEpisodeSelectedId.emit(episode.documentId);
     console.log(episode)
   }
 }
