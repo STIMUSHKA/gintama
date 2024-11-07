@@ -1,0 +1,10 @@
+<div class="container">
+    <h2>Аниме</h2>
+    <div class="content">
+        <div *ngFor="let anime of animeList" class="anime-instance" (click)="redirectToAnime(anime.documentId)">
+            <h2>
+                {{anime.title}}
+            </h2>
+        </div>
+    </div>
+</div>

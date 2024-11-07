@@ -2,7 +2,7 @@
     <div *ngFor="let episode of episodes" class="button-container">
         <button class="aero" 
         (click)="episodeClick(episode)" 
-        [ngClass]="{'active': episode.documentId == selectedEpisodeId}">
+        [ngClass]="{'active': episode.documentId == episodeId}">
             Серия {{ episode.order }} 
         </button>
     </div>

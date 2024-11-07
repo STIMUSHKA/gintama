@@ -1,7 +1,8 @@
 <div class="container">
+    <h2>{{currentAnime?.title}}</h2>
     <div class="content">
         <div class="title">
-            <h2>{{selectedEpisode.title}}</h2>
+            <h2>{{selectedEpisode?.title}}</h2>
         </div>
         <app-vjs-player 
         class="player"
@@ -24,8 +25,8 @@
     
         <div class="control-container">
             <div class="buttons">
-                <button class="aero">previous</button>
-                <button class="aero">next</button>
+                <button class="aero" (click)="redirectToPrevious()">previous</button>
+                <button class="aero" (click)="redirectToNext()">next</button>
             </div>
             <br><br>
             <app-series-cell 

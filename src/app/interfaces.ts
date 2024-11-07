@@ -16,7 +16,7 @@ export interface Season {
 }
 
 // interface для основного документа
-export interface Anime {
+export interface SubAnime {
     id: number;
     documentId: string;
     title: string;
@@ -24,6 +24,11 @@ export interface Anime {
     updatedAt: string;
     publishedAt: string;
     seasons: SubSeason[];
+}
+
+export interface Anime {
+    data: SubAnime,
+    meta: Meta,
 }
 
 // interface для метаданных
@@ -39,7 +44,7 @@ export interface Pagination {
 
 // interface для общего ответа
 export interface AllAnime {
-    data: Anime[];
+    data: SubAnime[];
     meta: Meta;
 }
 

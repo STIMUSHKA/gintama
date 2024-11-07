@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Episode, Season, SubEpisode } from '../interfaces';
 import { ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 @Component({
   selector: 'app-season',
@@ -17,7 +17,8 @@ export class SeasonComponent implements OnInit {
 
   constructor(
     private _dataService: DataService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
 
@@ -34,7 +35,13 @@ export class SeasonComponent implements OnInit {
   }
 
   public onEpisodeSelected(id: any) {
-    this.router.navigate(['/anime/' + this.seasonId + '/' + id]);
+    const aid = this.route.snapshot.paramMap.get('aid');
+
+    if (aid) {
+      this.router.navigate(['/anime', aid, this.seasonId, id]);
+    } else {
+      console.error('Не удалось получить параметры маршрута');
+    }
   }
   
 }

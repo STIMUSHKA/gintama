@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
-import { AllAnime, Anime, Episode, Season } from './interfaces';
-import { Observable, of } from 'rxjs';
+import { AllAnime, Anime, Episode, Season, SubAnime } from './interfaces';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
@@ -10,82 +10,80 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class DataService {
   private allAnime: AllAnime | null = null;
+  private anime: { [id: string]: Anime } = {};
   private seasons: { [id: string]: Season } = {};
   private episodes: { [id: string]: Episode } = {};
+  public currentAnime: BehaviorSubject<SubAnime | null> = new BehaviorSubject<SubAnime | null>(null);
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+  ) {}
 
-  public getAllAnime(): Observable<AllAnime> { // Изменен тип возвращаемого значения
+
+  public getAllAnime(): Observable<AllAnime> {
     if (this.allAnime) {
       return of(this.allAnime);
     } else {
       return this.apiService.getAllAnime().pipe(
         tap(data => {
-          this.allAnime = data; // Кэшируем данные
+          this.allAnime = data;
         }),
         catchError(error => {
           console.error('Ошибка при получении всех аниме:', error);
-          return of(); // Возвращаем null в случае ошибки
+          return of();
         })
       );
     }
   }
 
-  public getSeason(id: string): Observable<Season> { // Изменен тип возвращаемого значения
+  public getSeason(id: string): Observable<Season> {
     if (this.seasons[id]) {
       return of(this.seasons[id]);
     } else {
       return this.apiService.getSeason(id).pipe(
         tap(data => {
-          this.seasons[id] = data; // Кэшируем данные сезона
+          this.seasons[id] = data;
         }),
         catchError(error => {
           console.error(`Ошибка при получении сезона с ID ${id}:`, error);
-          return of(); // Возвращаем null в случае ошибки
+          return of();
         })
       );
     }
   }
 
-  public getEpisode(id: string): Observable<Episode> { // Изменен тип возвращаемого значения
+  public getEpisode(id: string): Observable<Episode> {
     if (this.episodes[id]) {
       return of(this.episodes[id]);
     } else {
       return this.apiService.getEpisode(id).pipe(
         tap(data => {
-          this.episodes[id] = data; // Кэшируем данные эпизода
+          this.episodes[id] = data;
         }),
         catchError(error => {
           console.error(`Ошибка при получении эпизода с ID ${id}:`, error);
-          return of(); // Возвращаем null в случае ошибки
+          return of();
         })
       );
     }
   }
 
-  public getAnime(id: string): Observable<Anime | null> {
-    // Проверяем, есть ли уже загруженные данные
-    const anime = this.allAnime?.data.find(item => item.documentId === id);
+  public getAnime(id: string): Observable<Anime> {
+    const anime = this.anime[id]
     
     if (anime) {
-      // Если аниме найдено в кэше, возвращаем его
       return of(anime);
     } else {
-      // Если аниме не найдено, загружаем все аниме
-      return this.apiService.getAllAnime().pipe(
+      return this.apiService.getAnime(id).pipe(
         tap(data => {
-          this.allAnime = data; // Кэшируем данные
+          this.anime[id] = data;
+          this.currentAnime.next(data.data)
         }),
-        // После загрузки данных, ищем нужное аниме
-        map(data => data.data.find(item => item.documentId === id) || null), // Находим аниме или возвращаем null
         catchError(error => {
           console.error('Ошибка при получении всех аниме:', error);
-          return of(); // Возвращаем null в случае ошибки
+          return of();
         })
       );
     }
   }
-  
-
-  
 }

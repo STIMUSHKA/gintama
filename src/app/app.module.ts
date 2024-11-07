@@ -14,6 +14,7 @@ import { SeriesCellComponent } from './series-cell/series-cell.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AnimeComponent } from './anime/anime.component';
 import { SeasonComponent } from './season/season.component';
+import { AnimelistComponent } from './animelist/animelist.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SeasonComponent } from './season/season.component';
     SeriesCellComponent,
     AnimeComponent,
     SeasonComponent,
+    AnimelistComponent,
   ],
   imports: [
     BrowserModule,

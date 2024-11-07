@@ -3,7 +3,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTab } from '@angular/material/tabs';
 import { MatTabGroup } from '@angular/material/tabs';
 import { DataService } from '../data.service'
-import { AllAnime, Season, SubSeason } from '../interfaces';
+import { Anime, SubSeason } from '../interfaces';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-anime',
@@ -15,13 +16,21 @@ export class AnimeComponent implements OnInit {
   public seasons: SubSeason[] = []
 
   constructor(
-    private _dataService: DataService
+    private _dataService: DataService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this._dataService.getAllAnime().subscribe( (animes: AllAnime) => {
-      this.title = animes.data[0].title
-      this.seasons = animes.data[0].seasons
+
+    this.route.paramMap.subscribe(params => {
+      const animeId = params.get('aid') || ''
+      this._dataService.getAnime(animeId).subscribe( (anime: Anime) => {
+
+        console.log(anime)
+        this.title = anime.data.title
+        this.seasons = anime.data.seasons
+      })
     })
+    
   }
 }

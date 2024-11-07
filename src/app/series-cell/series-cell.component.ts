@@ -14,20 +14,12 @@ export class SeriesCellComponent implements OnInit {
   @Output() emitEpisodeSelectedId = new EventEmitter<string>();
 
   ngOnInit(): void {
-    this.selectedEpisodeId = this.episodeId
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['episodes'] && changes['episodes'].currentValue) {
-      if (changes['episodes'].currentValue.length > 0) {
-          this.selectedEpisodeId = this.episodeId
-      }
-    }
   }
 
   public episodeClick(episode: SubEpisode) {
-    this.selectedEpisodeId = episode.documentId
     this.emitEpisodeSelectedId.emit(episode.documentId);
   }
 }
