@@ -5,6 +5,7 @@ import { EpisodeComponent } from './episode/episode.component';
 
 const routes: Routes = [
   { component: AnimeComponent, path: 'anime'},
+  { component: EpisodeComponent, path: 'anime/:sid'},
   { component: EpisodeComponent, path: 'anime/:sid/:eid'}
 ];
 

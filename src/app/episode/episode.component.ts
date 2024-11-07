@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EpisodeComponent implements OnInit {
   public episodes: SubEpisode[]
   public selectedEpisodeId: string = ''
+  public seasonId: string = ''
   public isEpisodeLoaded: boolean = false;
   public selectedEpisode: SubEpisode = {
     id: 1,
@@ -48,10 +49,12 @@ export class EpisodeComponent implements OnInit {
       } else {
         this.selectedEpisodeId = eid
       }
+      this.seasonId = sid
     });
     this._apiService.getSeason(sid).subscribe( (season: Season) => {
       this.episodes = season.data.episodes
-      if (!eid) {
+      console.log('eeeeeee',!eid)
+      if (eid == '0') {
         this.loadEpisode(this.episodes[0].documentId)
       } else {
         this.loadEpisode(eid)
@@ -61,6 +64,7 @@ export class EpisodeComponent implements OnInit {
 
   public onEpisodeSelected(id: any) {
     console.log(id)
+    this.router.navigate(['/anime/' + this.seasonId + '/' + id]);
     this.loadEpisode(id)
   }
   

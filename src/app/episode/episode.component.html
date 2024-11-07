@@ -32,7 +32,7 @@
             *ngIf="selectedEpisodeId"
             [episodeId]="selectedEpisodeId"
             [episodes]="episodes"
-            (episodeSelectedId)="onEpisodeSelected($event)"
+            (emitEpisodeSelectedId)="onEpisodeSelected($event)"
             ></app-series-cell>
         </div>    
     </div>
