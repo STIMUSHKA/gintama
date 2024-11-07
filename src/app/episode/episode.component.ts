@@ -53,6 +53,11 @@ export class EpisodeComponent implements OnInit {
     });
     this._apiService.getSeason(sid).subscribe( (season: Season) => {
       this.episodes = season.data.episodes
+      this.episodes.sort((a, b) => {
+        const orderA = a.order ?? Number.MAX_VALUE; // Если a.order null, используем максимальное значение
+        const orderB = b.order ?? Number.MAX_VALUE; // Если b.order null, используем максимальное значение
+        return orderA - orderB; // Сортировка по возрастанию
+      });
       console.log('eeeeeee',!eid)
       if (eid == '0') {
         this.loadEpisode(this.episodes[0].documentId)

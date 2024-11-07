@@ -24,6 +24,11 @@ export class SeasonComponent implements OnInit {
   ngOnInit(): void {
     this._apiService.getSeason(this.documentId).subscribe( (season: Season) => {
       this.episodes = season.data.episodes
+      this.episodes.sort((a, b) => {
+        const orderA = a.order ?? Number.MAX_VALUE; // Если a.order null, используем максимальное значение
+        const orderB = b.order ?? Number.MAX_VALUE; // Если b.order null, используем максимальное значение
+        return orderA - orderB; // Сортировка по возрастанию
+      });
       this.seasonId = season.data.documentId
     })
   }
