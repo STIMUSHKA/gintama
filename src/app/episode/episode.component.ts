@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Episode, Season, SubEpisode } from '../interfaces';
-import { ApiService } from '../api-service.service';
+import { DataService } from '../data.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -26,7 +26,7 @@ export class EpisodeComponent implements OnInit {
   private baseUrl: string = 'http://localhost:1337';
 
   constructor(
-    private _apiService: ApiService,
+    private _dataService: DataService,
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
     private router: Router
@@ -49,7 +49,7 @@ export class EpisodeComponent implements OnInit {
       }
       this.seasonId = sid
     });
-    this._apiService.getSeason(sid).subscribe( (season: Season) => {
+    this._dataService.getSeason(sid).subscribe( (season: Season) => {
       this.episodes = season.data.episodes
       this.episodes.sort((a, b) => {
         const orderA = a.order ?? Number.MAX_VALUE;
@@ -75,7 +75,7 @@ export class EpisodeComponent implements OnInit {
     this.isEpisodeLoaded = false;
     this.cdr.detectChanges();
     this.selectedEpisodeId = id
-    this._apiService.getEpisode(id).subscribe( (episode: Episode) => {
+    this._dataService.getEpisode(id).subscribe( (episode: Episode) => {
       this.selectedEpisode = episode.data
       console.log('this.episode', episode)
       this.isEpisodeLoaded = true;
