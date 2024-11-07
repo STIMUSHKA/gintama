@@ -14,7 +14,6 @@ export class SeriesCellComponent implements OnInit {
   @Output() emitEpisodeSelectedId = new EventEmitter<string>();
 
   ngOnInit(): void {
-    console.log('2323', this.episodes, this.episodeId)
     this.selectedEpisodeId = this.episodeId
 
   }
@@ -28,9 +27,7 @@ export class SeriesCellComponent implements OnInit {
   }
 
   public episodeClick(episode: SubEpisode) {
-    console.log(episode)
     this.selectedEpisodeId = episode.documentId
     this.emitEpisodeSelectedId.emit(episode.documentId);
-    console.log(episode)
   }
 }
