@@ -113,6 +113,7 @@ export class EpisodeComponent implements OnInit {
         this.episodes = season.data.episodes
         const eid = season.data.episodes[0].documentId
         this.router.navigate(['/anime', this.currentAnime.documentId, nextSeasonId, eid]);
+        this.loadEpisode(eid)
       })
     } else {
       const order = this.episodes.find( episode => episode.documentId == this.selectedEpisodeId)?.order || 0
@@ -123,7 +124,9 @@ export class EpisodeComponent implements OnInit {
   }
 
   redirectToPrevious(): void {
-    if(this.currentAnime.seasons.find( season => season.order == 1)?.documentId == this.seasonId) {
+    if(this.currentAnime.seasons.find( season => season.order == 1)?.documentId == this.seasonId &&
+        this.episodes.find( episode => episode.order == 1)?.documentId == this.selectedEpisodeId
+    ) {
       return
     } else if(this.selectedEpisodeId == this.episodes[0].documentId) {
       const order = this.currentAnime.seasons.find( season => season.documentId == this.seasonId)?.order || 0
@@ -133,6 +136,7 @@ export class EpisodeComponent implements OnInit {
         this.episodes = season.data.episodes
         const eid = season.data.episodes[season.data.episodes.length - 1].documentId
         this.router.navigate(['/anime', this.currentAnime.documentId, previousSeasonId, eid]);
+        this.loadEpisode(eid)
       })
     } else {
       const order = this.episodes.find( episode => episode.documentId == this.selectedEpisodeId)?.order || 0
